@@ -1,0 +1,81 @@
+
+{
+    "name": "joseconsador/integrations",
+    "description": "Integrations Project",
+    "keywords": ["integrations", "zendesk", "laravel"],
+    "license": "MIT",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:zendesk/monolog-formatter.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:zendesk/log-requests-laravel.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:zendesk/zendesk_laravel_statsd.git"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:zendesk/laravel-i18n-command.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "laravel/framework": "5.3.*",
+        "zendesk/zendesk_api_client_php": "dev-master",
+        "laravelcollective/html": "5.3.*",
+        "laracasts/utilities": "^2.1",
+        "predis/predis": "^1.1",
+        "zendesk/monolog-formatter": "dev-master",
+        "rtheunissen/guzzle-log-middleware": "^0.4.0",
+        "zendesk/log-requests-laravel": "dev-master",
+        "jenssegers/rollbar": "^1.5",
+        "fideloper/proxy": "^3.1",
+        "zendesk/zendesk_laravel_statsd": "dev-master",
+        "zendesk/laravel-i18n-command": "dev-master"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.0",
+        "symfony/css-selector": "3.1.*",
+        "symfony/dom-crawler": "3.1.*",
+        "laravel/homestead": "^3.0"
+    },
+    "autoload": {
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
+        ]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "php artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan optimize"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}
