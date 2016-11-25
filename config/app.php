@@ -162,6 +162,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
+        Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        Zendesk\DatadogStatsD\Providers\ZendeskStatsDClientProvider::class,
 
         /*
          * Package Service Providers...
@@ -225,7 +228,24 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'ZendeskApi' => App\Utilities\Facades\ZendeskApiFacade::class,
+        'ZendeskUrl' => \App\Utilities\Facades\ZendeskUrlFacade::class,
+        'ZendeskStatsDClient' => \Zendesk\DatadogStatsD\Utilities\Facades\ZendeskStatsDClientFacade::class,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Integration Config
+    |--------------------------------------------------------------------------
+    */
+
+    'zendesk_client_id' => env('ZENDESK_CLIENT_ID', ''),
+    'zendesk_client_secret' => env('ZENDESK_CLIENT_SECRET', ''),
+    'zendesk_domain' => env('ZENDESK_DOMAIN', 'zendesk.com'),
+    'zendesk_auth_cookie' => 'zendesk_auth',
+    'zendesk_x_header_value' => env('X_HEADER_VALUE', 'microsoft_dev'),
+
+    'zendesk_log' => [
+        'app_name' => '',
+    ],
 ];

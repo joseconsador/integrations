@@ -14,3 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('terms-and-conditions', [
+    'as' => 'terms',
+    'uses' => function () {
+        return view('zendesk.terms');
+    },
+]);
+
+Route::group(['as' => 'diagnostics::'], function () {
+    Route::get('ping', ['as' => 'ping', 'uses' => 'DiagnosticsController@ping']);
+
+    Route::get('diagnostic', ['as' => 'diagnostic', 'uses' => 'DiagnosticsController@diagnostic']);
+});

@@ -1,0 +1,36 @@
+GIT
+  remote: git@github.com:zendesk/zendesk_deployment.git
+  revision: be95895fb67913220f8bafba3961e176201e2a11
+  specs:
+    zendesk_deployment (3.1.0)
+      airbrussh
+      rake
+      sshkit (~> 1.9)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    airbrake (4.3.8)
+      builder
+      multi_json
+    airbrussh (1.1.1)
+      sshkit (>= 1.6.1, != 1.7.0)
+    builder (3.2.2)
+    multi_json (1.12.1)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.2.0)
+    rake (11.3.0)
+    sshkit (1.11.4)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  airbrake (< 5)!
+  zendesk_deployment!
+
+BUNDLED WITH
+   1.12.5

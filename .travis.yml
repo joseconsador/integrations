@@ -1,0 +1,29 @@
+language: php
+php:
+- 5.6
+- 7.0
+env:
+  global:
+  - ROLLBAR_LOG_LEVEL=none
+  - ROLLBAR_ENDPOINT=https://rollbar-us.zendesk.com/api/1/
+  - ROLLBAR_ACCESS_TOKEN=
+  - APP_ENV=test
+  - APP_DEBUG=true
+  matrix:
+    secure:
+cache:
+  directories:
+  - node_modules
+  - vendor
+install:
+  - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN};
+    fi;
+  - ". $HOME/.nvm/nvm.sh"
+  - nvm install stable
+  - nvm use stable
+  - npm install
+  - travis_retry composer self-update && travis_retry composer install --no-interaction
+  - gulp
+script:
+  - vendor/bin/phpunit --testsuite "Functional and Unit Test Suites"
+  - npm test

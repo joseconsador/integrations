@@ -41,6 +41,15 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+if (in_array(env('APP_ENV', 'production'), ['production', 'staging', 'master'])) {
+    $app->configureMonologUsing(function ($monolog) {
+        $stream = new \Monolog\Handler\StreamHandler('php://stderr', \Monolog\Logger::INFO, false);
+        $stream->setFormatter(new \Zendesk\Monolog\Formatters\ZendeskLogFormatter(config('app.zendesk_log.app_name'),
+            config('app.env')));
+        $monolog->pushHandler($stream, \Monolog\Logger::DEBUG, false);
+    });
+}
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
